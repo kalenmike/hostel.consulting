@@ -1,10 +1,12 @@
 import type { ElementType, ReactNode } from 'react'
 
+// The original's `.max-width` container is 1280px, which is what `wide`
+// tracks. The narrower variants stay for reading columns and the footer.
 const WIDTHS = {
   narrow: 'max-w-190',
   copy: 'max-w-215',
   mid: 'max-w-230',
-  wide: 'max-w-300',
+  wide: 'max-w-320',
 } as const
 
 export type ContainerWidth = keyof typeof WIDTHS

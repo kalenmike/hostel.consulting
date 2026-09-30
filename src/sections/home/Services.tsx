@@ -16,10 +16,10 @@ export function Services() {
           {SERVICES.map((service) => (
             <article key={service.title} className="text-center">
               <IconBadge name={service.icon} size="lg" />
-              <h3 className="mb-2 font-condensed text-xl font-bold text-white uppercase">
+              <h3 className="mb-3 font-condensed text-xl font-normal text-white uppercase">
                 {service.title}
               </h3>
-              <p className="text-sm text-slate-300">{service.body}</p>
+              <p className="text-base leading-relaxed text-slate-300">{service.body}</p>
             </article>
           ))}
         </div>

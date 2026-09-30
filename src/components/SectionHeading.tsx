@@ -39,16 +39,19 @@ export function SectionHeading({
 
   // The wrapper only exists to hold the eyebrow beneath the title. When it is
   // present the wrapper already centres the text, so only unwrapped headings
-  // need the alignment class on the heading itself.
+  // need the alignment class on the heading itself. The bottom margin separates
+  // the heading block from the description that follows it in every section.
   if (!eyebrow) {
-    return <h2 className={`text-4xl font-bold uppercase ${TONES[tone]} ${alignClass}`}>{title}</h2>
+    return (
+      <h2 className={`mb-9 text-4xl font-normal ${TONES[tone]} ${alignClass}`}>{title}</h2>
+    )
   }
 
   return (
-    <div className={alignClass}>
-      <h2 className={`text-4xl font-bold uppercase ${TONES[tone]}`}>{title}</h2>
+    <div className={`mb-9 ${alignClass}`}>
+      <h2 className={`text-4xl font-normal ${TONES[tone]}`}>{title}</h2>
       <span
-        className={`mt-2 block text-sm font-bold tracking-widest uppercase ${
+        className={`mt-3 block text-sm font-medium tracking-widest uppercase ${
           tone === 'light' ? 'text-frost' : 'text-accent'
         }`}
       >

@@ -6,7 +6,7 @@ export function CTA() {
     <section>
       <Link
         to="/contact-us/"
-        className="group relative flex items-center justify-center overflow-hidden bg-accent px-12 py-16 text-center transition-colors hover:bg-accent-dark focus-visible:bg-accent-dark"
+        className="group relative flex items-center justify-center overflow-hidden bg-accent px-12 py-16 text-center"
       >
         <span className="text-4xl font-bold whitespace-nowrap text-white transition-all duration-300 ease-in group-hover:translate-x-[200%] group-hover:opacity-0 group-focus-visible:translate-x-[200%] group-focus-visible:opacity-0 md:text-5xl">
           Start your project today!

@@ -13,10 +13,13 @@ type NavLinkProps = {
 // native anchor scrolling. Fragment links are therefore rendered as plain
 // anchors so the browser scrolls to the target itself (and honours
 // `scroll-padding-top`, keeping the target clear of the sticky header).
+// External URLs (the Insights community link) are also plain anchors, since
+// routing them through Router would fail.
 function NavLink({ to, children, ...rest }: NavLinkProps) {
-  if (to.includes('#')) {
+  const isExternal = /^https?:\/\//.test(to)
+  if (to.includes('#') || isExternal) {
     return (
-      <a href={to} {...rest}>
+      <a href={to} {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})} {...rest}>
         {children}
       </a>
     )

@@ -10,6 +10,15 @@ const routes = [
   { path: '/hostellife-hub/', file: 'hostellife-hub/index.html' },
 ]
 
+// The build does not know the deployed origin, so the absolute URLs used by
+// robots.txt and sitemap.xml come from SITE_URL (defaulting to the brand
+// domain). For GitHub Pages, set SITE_URL to https://<owner>.github.io and let
+// VITE_BASE_PATH supply the repository sub-path.
+const siteUrl = (process.env.SITE_URL || 'https://hostel.consulting').replace(/\/+$/, '')
+const basePath = process.env.VITE_BASE_PATH || '/'
+const base = basePath.endsWith('/') ? basePath : `${basePath}/`
+const absoluteUrl = (path) => siteUrl + base + path.replace(/^\//, '')
+
 const template = readFileSync(resolve(root, 'dist/index.html'), 'utf-8')
 
 const vite = await createServer({
@@ -36,6 +45,23 @@ for (const route of routes) {
 }
 
 await vite.close()
+
+// robots.txt and sitemap.xml for search engines. The routes above are the only
+// crawlable pages, so the sitemap is derived from them rather than hand-kept.
+const today = new Date().toISOString().slice(0, 10)
+const urls = routes
+  .map(
+    (route) =>
+      `  <url>\n    <loc>${absoluteUrl(route.path)}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${route.path === '/' ? '1.0' : '0.8'}</priority>\n  </url>`,
+  )
+  .join('\n')
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+writeFileSync(resolve(root, 'dist/sitemap.xml'), sitemap)
+console.log('generated dist/sitemap.xml')
+
+const robots = `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}${base}sitemap.xml\n`
+writeFileSync(resolve(root, 'dist/robots.txt'), robots)
+console.log('generated dist/robots.txt')
 
 function titleFor(path) {
   if (path.startsWith('/contact-us')) return 'Contact Us'

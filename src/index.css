@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Michroma&family=Poppins:wght@400;700;900&display=swap');
 @import 'tailwindcss';
+
+/* Body copy: the original sets 16px on a 1.7 line height, and that open leading
+   is a large part of why its paragraphs read as airy rather than cramped. This
+   was referenced as text-body by body and .field but never defined, so it
+   compiled to nothing. A @utility is the Tailwind v4 way to define it. */
+@utility text-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
 
 @theme {
   --color-accent: #02aed6;
@@ -12,8 +21,24 @@
   --color-line: #e1e1e1;
   --color-frost: #6fd3ec;
 
-  --font-sans: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-  --font-condensed: 'Open Sans Condensed', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  /* The original site sets every heading and paragraph in Lato 400 and reserves
+     700 for buttons, so both tokens resolve to the same family here. The
+     condensed role is kept because headings are tagged with it across the
+     sections; it no longer pulls in a second, heavier face. */
+  --font-sans: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-condensed: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* The Hub page sets its big headlines in Poppins and its small section
+     labels in Michroma; the rest of the site stays on Lato. */
+  --font-poppins: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  --font-michroma: 'Michroma', sans-serif;
+
+  /* Vertical clearance inside the hero reveal clip boxes. The title is set on a
+     1:1 line box, so its ascenders and descenders overhang the height the
+     browser measures for it; once overflow is hidden that overhang has to be
+     reserved or "Diagnosis" and "Management" lose their descenders. Shared by
+     .hero-reveal and the two slide keyframes so they stay in lockstep. */
+  --hero-reveal: 0.5rem;
 
   --animate-slider-progress: slider-progress 4s linear forwards;
   --animate-slide-title-up: slide-title-up 0.7s ease-out both;
@@ -29,11 +54,13 @@
     }
   }
 
-  /* Text above the divider bar slides up while fading in. */
+  /* Text above the divider bar slides up while fading in. The offset is the
+     element's own height plus the clip padding, so the line starts fully
+     outside its .hero-reveal box and is never visible under the bar. */
   @keyframes slide-title-up {
     from {
       opacity: 0;
-      transform: translateY(2.5rem);
+      transform: translateY(calc(100% + var(--hero-reveal) * 2));
     }
     to {
       opacity: 1;
@@ -41,11 +68,12 @@
     }
   }
 
-  /* Text below the divider bar slides down while fading in. */
+  /* Text below the divider bar slides down while fading in, starting fully
+     above the bar for the same reason. */
   @keyframes slide-text-down {
     from {
       opacity: 0;
-      transform: translateY(-2.5rem);
+      transform: translateY(calc(-100% - var(--hero-reveal) * 2));
     }
     to {
       opacity: 1;
@@ -75,11 +103,15 @@
     @apply bg-white font-sans text-body;
   }
 
+  /* Headings are Lato 400 with a little room underneath. Preflight zeroes all
+     margins, which left every heading touching the copy below it; the bottom
+     margin restores the gap between a heading and its description without
+     needing a wrapper class at each call site. */
   h1,
   h2,
   h3,
   h4 {
-    @apply font-condensed text-ink;
+    @apply mb-4 font-condensed font-normal text-ink;
   }
 
   a {
@@ -88,6 +120,13 @@
 
   a:hover {
     @apply text-accent-dark;
+  }
+
+  /* The original carries ~21px under each paragraph (1.3em at 16px). Preflight
+     zeroes it, so stacked copy on the interior pages ran together; this puts
+     the rhythm back in one place. The hero subtitle opts out with mb-0. */
+  p {
+    @apply mb-5;
   }
 }
 
@@ -112,8 +151,11 @@
     @apply border-accent bg-accent text-white;
   }
 
+  /* The original's inputs are a 1px #ddd hairline with a 4px radius and a
+     compact ~34px height. They use text-base/leading-snug rather than
+     text-body, because the 1.7 body leading would make every field 45px tall. */
   .field {
-    @apply mt-1.5 block w-full rounded-lg border border-line bg-white px-3 py-2.5 font-sans text-body;
+    @apply mt-1.5 block w-full rounded border border-line bg-white px-2 py-1.5 font-sans text-base leading-snug;
   }
 
   .field:focus {
@@ -124,6 +166,34 @@
      screenshots all need the same rounding and soft drop shadow. */
   .media-frame {
     @apply rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.1)];
+  }
+
+  /* Light scrim behind the hero copy. The slide photos span the full 0-255
+     luminance range, so no single text colour can clear WCAG against them:
+     black type needs a backdrop of at least 45/255 and white type at most
+     47/255. The overlay compresses that range instead. 45% white clears
+     4.5:1 for the 16px subtitle and 3:1 for the logotype across every slide
+     and viewport, while the gradient keeps the photo edges untouchsed.
+     Tunable in one place if a slide is swapped for a darker photo. */
+  .hero-scrim {
+    background: linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 0) 0%,
+      rgb(255 255 255 / 0.45) 18%,
+      rgb(255 255 255 / 0.45) 82%,
+      rgb(255 255 255 / 0) 100%
+    );
+  }
+
+  /* Clip box for the hero copy. Each line is only allowed to exist on its own
+     side of the divider bar: the title rises out of the bar upwards and the
+     subtitle drops out of it downwards, so neither is ever seen crossing the
+     bar from the wrong direction. The padding is matched by the start offset
+     in the slide-title-up / slide-text-down keyframes, so a line starts
+     completely hidden and simply clears the clip edge as it travels. */
+  .hero-reveal {
+    @apply overflow-hidden;
+    padding-block: var(--hero-reveal);
   }
 }
 

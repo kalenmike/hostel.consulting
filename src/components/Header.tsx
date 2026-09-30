@@ -62,7 +62,7 @@ function Header() {
             <NavLink
               key={link.label}
               to={link.to}
-              className={`flex h-19 items-center px-2.5 text-base font-semibold tracking-[0.05em] text-black uppercase transition-shadow duration-200 max-md:h-auto max-md:text-sm ${
+              className={`flex h-19 items-center px-2.5 text-base font-normal tracking-[0.05em] text-black uppercase transition-shadow duration-200 max-md:h-auto max-md:text-sm ${
                 isActive(link.to)
                   ? 'shadow-[inset_0_4px_0_0_#02aed6]'
                   : 'shadow-none hover:shadow-[inset_0_4px_0_0_#02aed6]'

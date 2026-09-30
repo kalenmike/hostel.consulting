@@ -41,10 +41,11 @@ export function Hero() {
         />
       </div>
       <div
-        className="flex h-140 items-center justify-center bg-cover bg-center bg-no-repeat"
+        className="relative flex h-140 items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${slide.bg})` }}
       >
-        <div className="px-5">
+        <div className="hero-scrim pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div className="relative px-5">
           {slide.logo ? (
             <img
               src="/images/slider-logo.png"
@@ -53,26 +54,26 @@ export function Hero() {
             />
           ) : (
             <div className="text-center">
-              <a
-                key={`title-${index}`}
-                href="#services"
-                className="inline-block animate-slide-title-up font-sans text-5xl font-bold text-black hover:opacity-70"
-              >
-                {slide.title}
-              </a>
+              <div key={`title-${index}`} className="hero-reveal">
+                <a
+                  href="#services"
+                  className="block animate-slide-title-up font-sans text-5xl font-bold text-black hover:opacity-80"
+                >
+                  {slide.title}
+                </a>
+              </div>
               <div className="mx-auto my-2 h-1 w-88 bg-accent" />
               {slide.subtitle && (
-                <p
-                  key={`sub-${index}`}
-                  className="mx-auto mt-3 max-w-150 animate-slide-text-down font-condensed text-base font-bold leading-6 text-black"
-                >
-                  {slide.subtitle.split('\n').map((line) => (
-                    <span key={line}>
-                      {line}
-                      <br />
-                    </span>
-                  ))}
-                </p>
+                <div key={`sub-${index}`} className="hero-reveal mt-3">
+                  <p className="mx-auto mb-0 max-w-150 animate-slide-text-down font-condensed text-base font-normal leading-6 text-black">
+                    {slide.subtitle.split('\n').map((line) => (
+                      <span key={line}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </p>
+                </div>
               )}
             </div>
           )}
