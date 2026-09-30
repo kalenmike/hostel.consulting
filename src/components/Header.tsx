@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { asset } from '../lib/assets'
 import { NAV_LINKS } from '../data'
 import NavLink from './NavLink'
 
@@ -38,7 +39,7 @@ function Header() {
       <div className="mx-auto flex h-19 max-w-300 items-center justify-between px-5">
         <Link to="/" className="block" onClick={() => setOpen(false)}>
           <img
-            src="/images/logo.png"
+            src={asset('/images/logo.png')}
             alt="Hostel Consulting"
             className="block w-[175px] shrink-0 max-md:w-[140px]"
           />

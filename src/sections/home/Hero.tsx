@@ -1,4 +1,5 @@
 import CarouselDots from '../../components/CarouselDots'
+import { asset } from '../../lib/assets'
 import { useCarousel } from '../../hooks/useCarousel'
 import { usePageVisibility } from '../../hooks/usePageVisibility'
 
@@ -42,13 +43,13 @@ export function Hero() {
       </div>
       <div
         className="relative flex h-140 items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${slide.bg})` }}
+        style={{ backgroundImage: `url(${asset(slide.bg)})` }}
       >
         <div className="hero-scrim pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="relative px-5">
           {slide.logo ? (
             <img
-              src="/images/slider-logo.png"
+              src={asset('/images/slider-logo.png')}
               alt="Hostel Consulting"
               className="mx-auto max-w-105"
             />

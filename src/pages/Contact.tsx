@@ -1,4 +1,5 @@
 import Container from '../components/Container'
+import { asset } from '../lib/assets'
 import ContactForm from '../components/ContactForm'
 import PageHero from '../components/PageHero'
 import { PageHeading } from '../components/SectionHeading'
@@ -14,7 +15,7 @@ function Contact() {
           <PageHeading as="h1" size="xl" tone="light" className="mb-0 tracking-tight">
             Contact Us
           </PageHeading>
-          <img src="/images/power-your-hostel.png" alt="Hostel Consulting" className="mx-auto w-75" />
+          <img src={asset('/images/power-your-hostel.png')} alt="Hostel Consulting" className="mx-auto w-75" />
         </Container>
       </PageHero>
 
@@ -47,7 +48,7 @@ function Contact() {
                 className="mt-6 block"
               >
                 <img
-                  src="/images/hostellife-hub-logo.png"
+                  src={asset('/images/hostellife-hub-logo.png')}
                   alt="HostelLife Hub"
                   className="media-frame mx-auto w-full max-w-95"
                 />

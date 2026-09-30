@@ -1,4 +1,5 @@
 import Container from '../components/Container'
+import { asset } from '../lib/assets'
 import { Icon } from '../components/Icon'
 import type { IconName } from '../components/icon-registry'
 
@@ -81,7 +82,7 @@ function HostelLifeHub() {
           <p className="mt-4 font-poppins text-[28px] leading-tight font-normal text-[#006d8c] md:text-[56px]">
             Where hostel professionals connect, collaborate, and thrive together
           </p>
-          <img src="/images/hub-logo.png" alt="HostelLife Hub" className="mx-auto mt-10 max-w-150" />
+          <img src={asset('/images/hub-logo.png')} alt="HostelLife Hub" className="mx-auto mt-10 max-w-150" />
         </Container>
       </section>
 
@@ -115,7 +116,7 @@ function HostelLifeHub() {
           </h2>
           <div className="mx-auto mt-10 aspect-square max-w-240">
             <img
-              src="/images/hub-design.png"
+              src={asset('/images/hub-design.png')}
               alt="HostelLife Hub"
               className="h-full w-full object-contain"
             />
@@ -132,7 +133,7 @@ function HostelLifeHub() {
           </p>
           <div className="mx-auto aspect-[3/2] w-full max-w-158 overflow-hidden">
             <img
-              src="/images/hub-stationery.png"
+              src={asset('/images/hub-stationery.png')}
               alt="HostelLife Hub stationery"
               className="h-full w-full object-cover"
             />
@@ -157,7 +158,7 @@ function HostelLifeHub() {
 
       <section className="bg-mist py-30">
         <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
-          <img src="/images/hostellife-hub-logo.png" alt="HostelLife Hub" className="mx-auto max-w-105" />
+          <img src={asset('/images/hostellife-hub-logo.png')} alt="HostelLife Hub" className="mx-auto max-w-105" />
           <p className="font-poppins text-[28px] leading-snug font-bold text-[#00282b] md:text-[42px] md:leading-[1.55]">
             More than just an e-learning and resource platform, it&rsquo;s a{' '}
             <strong>movement where hostels support hostels</strong>.
@@ -169,7 +170,7 @@ function HostelLifeHub() {
         <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
           <div className="mx-auto aspect-square w-full max-w-158 overflow-hidden">
             <img
-              src="/images/hub-mockup.png"
+              src={asset('/images/hub-mockup.png')}
               alt="HostelLife Hub community mockup"
               className="h-full w-full object-cover"
             />
@@ -223,7 +224,7 @@ function HostelLifeHub() {
             </p>
           </div>
           <div className="mx-auto aspect-square w-full max-w-125 overflow-hidden">
-            <img src="/images/hub-paper.png" alt="HostelLife Hub paper" className="h-full w-full object-cover" />
+            <img src={asset('/images/hub-paper.png')} alt="HostelLife Hub paper" className="h-full w-full object-cover" />
           </div>
         </Container>
       </section>
