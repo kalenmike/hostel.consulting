@@ -1,0 +1,5 @@
+export { NAV_LINKS } from './nav'
+export { SERVICES } from './services'
+export { HOSTEL_COLUMNS } from './hostels'
+export { TESTIMONIALS } from './testimonials'
+export { SOCIAL_LINKS } from './social'

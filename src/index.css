@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Open+Sans:wght@400;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-accent: #02aed6;
+  --color-accent-dark: #0b8ead;
+  --color-ink: #24282b;
+  --color-ink-2: #26292c;
+  --color-body: #4a4a4a;
+  --color-muted: #848484;
+  --color-mist: #f4f6f7;
+  --color-line: #e1e1e1;
+  --color-frost: #6fd3ec;
+
+  --font-sans: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-condensed: 'Open Sans Condensed', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  --animate-slider-progress: slider-progress 4s linear forwards;
+  --animate-slide-title-up: slide-title-up 0.7s ease-out both;
+  --animate-slide-text-down: slide-text-down 0.7s ease-out both;
+  --animate-testimonial-fade: testimonial-fade 0.45s ease-out both;
+
+  @keyframes slider-progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  /* Text above the divider bar slides up while fading in. */
+  @keyframes slide-title-up {
+    from {
+      opacity: 0;
+      transform: translateY(2.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Text below the divider bar slides down while fading in. */
+  @keyframes slide-text-down {
+    from {
+      opacity: 0;
+      transform: translateY(-2.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes testimonial-fade {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    @apply bg-white font-sans text-body;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-condensed text-ink;
+  }
+
+  a {
+    @apply text-accent;
+  }
+
+  a:hover {
+    @apply text-accent-dark;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-block cursor-pointer rounded-lg border-2 border-transparent px-7 py-3 font-bold tracking-wide transition-colors duration-200;
+  }
+
+  .btn-accent {
+    @apply border-accent bg-accent text-white;
+  }
+
+  .btn-accent:hover {
+    @apply border-accent-dark bg-accent-dark text-white;
+  }
+
+  .btn-outline {
+    @apply rounded-none border-3 border-accent bg-transparent px-8 text-sm text-accent;
+  }
+
+  .btn-outline:hover {
+    @apply border-accent bg-accent text-white;
+  }
+
+  .field {
+    @apply mt-1.5 block w-full rounded-lg border border-line bg-white px-3 py-2.5 font-sans text-body;
+  }
+
+  .field:focus {
+    @apply border-accent outline-2 outline-accent;
+  }
+
+  /* Shared frame for wide media: the About video and the HostelLife Hub
+     screenshots all need the same rounding and soft drop shadow. */
+  .media-frame {
+    @apply rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.1)];
+  }
+}
+
+@utility hub-benefits {
+  list-style: none;
+  padding-left: 0;
+
+  & li {
+    padding: 0.625rem 0 0.625rem 1.75rem;
+    position: relative;
+  }
+
+  & li::before {
+    content: '\2713';
+    color: var(--color-accent);
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+  }
+}
