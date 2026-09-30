@@ -15,7 +15,7 @@ function remoteInfo() {
       encoding: 'utf-8',
       stdio: ['ignore', 'pipe', 'ignore'],
     }).trim()
-    const match = url.match(/(?:github\.com[:/])([^/]+)\/([^/.]+)(?:\.git)?$/)
+    const match = url.match(/(?:github\.com[:/])([^/]+)\/(.+?)(?:\.git)?$/)
     if (match) return { owner: match[1], repo: match[2] }
   } catch {
     /* no remote yet */

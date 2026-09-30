@@ -15,7 +15,7 @@ const routes = [
 // domain). For GitHub Pages, set SITE_URL to https://<owner>.github.io and let
 // VITE_BASE_PATH supply the repository sub-path.
 const siteUrl = (process.env.SITE_URL || 'https://hostel.consulting').replace(/\/+$/, '')
-const basePath = process.env.VITE_BASE_PATH || '/'
+const basePath = process.env.VITE_BASE_PATH || '/hostel.consulting/'
 const base = basePath.endsWith('/') ? basePath : `${basePath}/`
 const absoluteUrl = (path) => siteUrl + base + path.replace(/^\//, '')
 
