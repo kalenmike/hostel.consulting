@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kalenmike.github.io/hostel.consulting/sitemap.xml
